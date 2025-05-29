@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class IceCream {
     public static void main(String[] args) {
         
@@ -29,6 +31,42 @@ public class IceCream {
         //Has de usar un array para almacenar los sabores de helado y un bucle para imprimirlos.
 
         //Mira en el ejemplo los saltos de línea que has de tener.
-    
+
+        String[] flavour = {"Chocolate", "Fresa", "Vainilla"};
+        System.out.print("¿Cuántas bolas de helado quieres?: ");
+        Scanner scanner = new Scanner(System.in);
+        int cantidad = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("\n¡Perfecto! Ahora escoge de qué sabor quieres cada helado:");
+        for (int i = 0; i < flavour.length; i++) {
+            System.out.println("    " + i + ". " + flavour[i]);
+        }
+        String[] order = new String[cantidad];
+        for (int i = 0; i < cantidad; i++) {
+            int eleccion = -1;
+            do {
+                System.out.print(i + ". ");
+                String input = scanner.nextLine();
+                try {
+                    eleccion = Integer.parseInt(input);
+                    if (eleccion < 0 || eleccion >= flavour.length) {
+                        System.out.println("Por favor ingresa un número válido entre 0 y " + (flavour.length - 1));
+                        eleccion = -1;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Eso no es un número válido. Intenta de nuevo.");
+                    eleccion = -1;
+                }
+            } while (eleccion == -1);
+            order[i] = flavour[eleccion];
+        }
+        System.out.println("\n¡Gracias por tu orden! Has pedido los siguientes sabores:");
+        for (int i = 0; i < cantidad; i++) {
+            System.out.println("    " + i + ". " + order[i]);
+        }
+        System.out.println("\n¿Es correcto? presiona intro para continuar");
+        scanner.nextLine();
+        System.out.println("\n¡Listo, tenemos tu orden! Acércate al mostrador y Robotina te entregará tu helado");
+        scanner.close();
     }
 } 
